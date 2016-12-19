@@ -1,0 +1,123 @@
+<%- include header %>
+<br><br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="entry">
+       <h1 style="text-align:center"><%= topic.title %></h1>
+       <hr>
+       <p class="articledate"><%= topic.updatedAt1 %>· <%= topic.topic_type %></p>
+  <br>
+  <div class="authorarea">
+    <p>本文作者： <%= author.username %>。<span class="text-danger">未经作者许可，禁止转载！</span></p>
+    <p><%= author.company %> <%= author.position %> <%= author.introduce %></p>
+  </div>
+  <div class="content">
+    <%- topic.content %>
+  </div>
+
+  <!--分享区 -->
+  <div class="jiathis_style pull-right">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tools_1"></a>
+<a class="jiathis_button_tools_2"></a>
+<a class="jiathis_button_tools_3"></a>
+<a class="jiathis_button_tools_4"></a>
+<a href="http://www.jiathis.com/share?uid=2112095" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<br>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2112095" charset="utf-8"></script>
+
+    <!--评论区 -->
+    <hr>
+    <div class="reply">
+       <p class="articledate"><%= replies.length %>条评论</p>
+       <div class="comment">
+        <% replies.forEach(function(reply){%>
+            <% if((reply.parentid) === null){%>
+            <div id="<%= reply.id %>">
+            <p class="replyer"><%= reply.replyer %> <span class="articledate"><%= reply.createdAt1 %></span></p>
+            <p class="replycontent"><%= reply.content %></p>
+
+            <div id="accordion">
+              <p class="text-right" id="delete<%=reply.id %>">
+                <% if(reply.replyer == username) {%>
+                <a href="/deletereply/<%=reply.id %>">删除</a>
+                <% }%>
+                <a data-toggle="collapse" data-parent="#accordion" href="#reply<%= reply.id %>" class="blank">回复</a>
+              </p>
+              <div id="reply<%= reply.id %>" class="panel-collapse collapse">
+                <div class="comment-text" style="background-color:#f9f9f9">
+                <form class="form-horizontal"  role="form" method="post">
+                  <input type="hidden"  name="pparentid" value="<%= reply.pparentid %> ">
+                  <input type="hidden"  name="parentid" value="<%= reply.id %> ">
+                  <input type="hidden"  name="toid" value="<%= reply.user_id %> ">
+                  <input type="hidden"  name="toname" value="<%= reply.replyer %> ">
+                  <textarea class="mousetrap" style="background-color:#f9f9f9" name="comment" id="comment<%= reply.id %>" ></textarea>
+                  <button  type="submit" class="btn btn-primary bottom-space">发表</button>
+                </form>
+
+              </div>
+              </div>
+            </div>
+            <div class="childreply" id="childreply<%= reply.id %>"></div>
+            </div>
+        <%}else{%>
+            <script type="text/javascript">
+            var replyhtml = '<div id="<%= reply.id %>"><p class="replycontent"><a class="replyer"><%= reply.replyer %>:</a>'+
+            '<%= reply.content %></p>'+
+            '<p><span class="articledate"><%= reply.createdAt1 %></span></p></div>'+
+            '<div id="accordion">  <p class="text-right" id="delete<%=reply.id %>">'+
+            '<a data-toggle="collapse" data-parent="#accordion" href="#reply<%= reply.id %>" class="blank">回复</a></p>'+
+            '<div id="reply<%= reply.id %>" class="panel-collapse collapse">'+
+            '<div class="comment-text" style="background-color:#f9f9f9">'+
+            '<form class="form-horizontal"  role="form" method="post">'+
+            '<input type="hidden"  name="pparentid" value="<%= reply.pparentid %> ">'+
+            '<input type="hidden"  name="parentid" value="<%= reply.id %> ">'+
+            '<input type="hidden"  name="toid" value="<%= reply.user_id %> ">'+
+            '<input type="hidden"  name="toname" value="<%= reply.replyer %> ">'+
+            '<textarea class="mousetrap" style="background-color:#f9f9f9" name="comment" id="comment<%= reply.id %>" ></textarea>'+
+            '<button  type="submit" class="btn btn-primary bottom-space">发表</button></form>'+
+            '</div></div></div><div id="childreply<%= reply.id %>"></div></div>';
+              $(replyhtml).appendTo('#childreply<%= reply.parentid %>');
+              if("<%= reply.replyer %>" == "<%= username %>" ){
+                var deletehtml = '<a href="/deletereply/<%=reply.id %>">删除</a>&nbsp;';
+                $('#delete<%=reply.id %>').prepend(deletehtml);
+              }
+            </script>
+        <% } %>
+            <script type="text/javascript">
+                 $(document).ready(function(){
+                   $(".blank").click(function(){
+                     $("#comment<%= reply.id %>").text('@'+$("#comment<%= reply.id %>").prev("input").val()+':');
+                   })
+                 })
+            </script>
+        <% }) %>
+          <br>
+        </div>
+        <br>
+        <p class="text-center">没有更多评论了</p>
+      <div class="comment-text">
+        <form class="form-horizontal" role="form" method="post" id="commentform">
+          <% if(replies.length > 0){%>
+            <input type="hidden"  name="pparentid" value="<%=replies[replies.length-1].id +1%>">
+          <% } %>
+          <input type="hidden"  name="toid" value="<%= topic.user_id %> ">
+          <input type="hidden"  name="toname" value="<%= topic.author %> ">
+          <textarea class="form-control mousetrap" placeholder="写下你的评论……" name="comment" id="content"></textarea>
+          <button  type="submit" class="btn btn-primary bottom-space">发表</button>
+        </form>
+      </div>
+
+    </div>
+
+    </div>
+  </div>
+</div>
+<%- include footer %>

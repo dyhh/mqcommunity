@@ -1,0 +1,36 @@
+<% include header %>
+<div class="row" >
+    <div class="mainbk">
+
+    </div>
+  </div>
+  <p>&nbsp;</p>
+<div class="container">
+
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+      <% alltopics.forEach(function(topic){%>
+        <div class="thumbnail">
+          <img src="image/tpsc03.png">
+          <div class="caption">
+                <h3><a href="/showtopic/<%=topic.id %>"><%= topic.title %></a></h3>
+                <p class="articledate"><%= topic.createdAt1 %>· <%= topic.topic_type %></p>
+                <p>
+                  <%= topic.brief %>
+                </p>
+            </div>
+        </div>
+      <% })%>
+      </div>
+      <div class="col-md-1">
+      </div>
+    </div>
+</div>
+<a href="#0" class="cd-top">Top</a>
+<% include footer %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#mainpage").addClass("active");
+  })
+</script>

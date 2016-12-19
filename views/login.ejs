@@ -1,0 +1,54 @@
+<%- include header %>
+<br><br><br>
+<div class="container">
+  <div class="col-sm-12">
+    <p class="text-center blog_title" style="text-indent:0em;">美勤社区</p>
+    <p class="text-center blog_subtitle" style="text-indent:0em;margin-top:10px">和你一起进步</p>
+    <h4 class="text-center sub_title">
+      <span>
+        <a class="active" href="/login">登录</a>
+        <b>·</b>
+        <a href="/reg">注册</a>
+      </span>
+    </h4>
+  </div>
+    <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post">
+        <fieldset>
+
+        <% if(locals.islogin) { %>
+
+           <h3 class="text-center"> <%= username %>已经登陆。<a class="btn btn-lg" href="/logout">登出</a></h3>
+
+
+            <% } else{ %>
+              <div class="input-group">
+
+              <h5 class="text-danger">
+              	 <%=err%>
+              </h5></div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" class="form-control input-lg input_size" id="loginname" name="loginname" placeholder="请输入用户名/手机号/邮箱">
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control input-lg input_size" name="password" id="password" placeholder="请输入密码">
+              </div>
+            <button type="submit" class="btn btn-info btn-lg btn-block bottom-space">登录</button>
+
+        </fieldset>
+        <div class="row">
+                   <div class="col-sm-6">
+                   <p class="text-left" style="text-indent:0em">
+                       <input type="checkbox" value="" checked>记住我
+                   </p></div>
+                   <div class="col-sm-6">
+                   <p class="text-right">
+                     <a href="/lostpassword" style="color:rgb(51,51,51)">忘记密码？</a>
+                   </p></div>
+                </div>
+    </form>
+    <% } %>
+</div>
+<%- include footer %>

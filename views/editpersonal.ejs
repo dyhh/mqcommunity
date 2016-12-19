@@ -1,0 +1,113 @@
+<%- include header %>
+<br><br><br>
+<div class="container">
+  <div class="col-sm-12">
+    <div class="col-sm-3 left-box">
+      <div class="people">
+        <div class="basic-info">
+          <div class="avatar">
+            <img src="../image/people.png" alt="代花花">
+          </div>
+
+            <% if(locals.islogin) {
+                %>
+               <h3 class="username" id="username"> <%= user.username %></h3><br>
+               <a href="/editpassword"><span class="glyphicon glyphicon-lock"></span> 修改密码</a>
+            <% }  else{ %>
+              <div class="input-group">
+              </div><% } %>
+      </div>
+    </div></div>
+    <div class="col-sm-9 left-right">
+
+    <form id="editpersonalform" class="form-horizontal" style="background-color:#fff;padding-left:30px" role="form" method="post">
+        <fieldset>
+          <input type="hidden" id="id" name="id">
+
+              <h3>个人信息完善</h3>
+              <hr>
+          <div style="padding-left:10px">
+              <div class="row">
+                  <h5 class="col-sm-2">用户名：</h5>
+                  <h5 class="col-sm-6"><%= user.username %></h5>
+              </div>
+
+              <div class="row">
+                  <h5 class="col-sm-2">电子邮箱：</h5>
+                  <h5 class="col-sm-6"><%= user.email %></h5>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">真实姓名：</h5>
+                    <div class="col-sm-5">
+                    <input type="text" class="form-control input-sm" id="truename" name="truename"
+                         placeholder="请输入你的真实姓名" value= <%= user.truename %> >
+                    </div>
+              <div id="truenameinfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">手机号：</h5>
+                    <div class="col-sm-5">
+                    <input type="text" class="form-control input-sm" id="phone" name="phone"
+                         placeholder="请输入手机号" value= <%= user.phone %> >
+                    </div>
+              <div id="phoneinfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">所在公司：</h5>
+                    <div class="col-sm-5">
+                    <input type="text" class="form-control input-sm" id="company" name="company"
+                         placeholder="请输入你的公司" value= <%= user.company %> >
+                    </div>
+              <div id="companyinfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">职位：</h5>
+                    <div class="col-sm-5">
+                    <input type="text" class="form-control input-sm" id="position" name="position"
+                         placeholder="请输入你的职位" value= <%= user.position %> >
+                    </div>
+              <div id="positioninfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">个人简介：</h5>
+                    <div class="col-sm-5">
+                    <textarea class="form-control" id="introduce" name="introduce" rows="5"
+                         placeholder="请输入你的个人简介" value= <%= user.introduce %>></textarea>
+                    </div>
+              <div id="introduceinfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">个性签名：</h5>
+                    <div class="col-sm-5">
+                    <input type="text" class="form-control input-sm" id="personalcharacter" name="personalcharacter"
+                         placeholder="请输入你的个性签名" value= <%= user.personalcharacter %> >
+                    </div>
+              <div id="personalcharacterinfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row">
+                    <h5 class="col-sm-2">QQ：</h5>
+                    <div class="col-sm-5">
+                    <input type="text" class="form-control input-sm" id="qq" name="qq"
+                         placeholder="请输入你的QQ号" value= <%= user.qq %> >
+                    </div>
+              <div id="personalcharacterinfo" class="col-sm-4"><span class="notice"></span></div>
+              </div>
+              <br>
+              <div class="row"><div class="col-sm-offset-4 col-sm-2">
+                   <button  type="submit" class="btn btn-info bottom-space">保存</button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+    </form>
+      </div>
+</div>
+<%- include footer %>
+<script src="/javascripts/editpervalidate.js" type="text/javascript"></script>

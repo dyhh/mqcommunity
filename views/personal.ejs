@@ -1,0 +1,92 @@
+<%- include header %>
+<br><br><br>
+<div class="container">
+    <div class="col-sm-12">
+      <div class="col-sm-3 left-box">
+        <div class="people">
+          <div class="basic-info">
+            <div class="avatar">
+              <img src="../image/people.png" alt="代花花">
+            </div>
+              <% if(locals.islogin) {
+                  %>
+                 <h3 class="username" id="username"> <%= user.username %></h3>
+                 <p style="text-indent:0em"><%= user.personalcharacter %></p><br>
+                 <a href="/editpersonal"><span class="glyphicon glyphicon-edit"></span> 修改个人信息</a>
+                 &nbsp;&nbsp;&nbsp;
+                 <a href="/editpassword"><span class="glyphicon glyphicon-lock"></span> 修改密码</a>
+              <% }  %>
+        </div>
+      </div></div>
+      <div class="col-sm-9 left-right">
+        <ul id="myTab" class="nav nav-tabs" style="font-size:20px">
+            <li class="active">
+                <a href="#info" data-toggle="tab">
+                    个人信息
+                </a>
+            </li>
+            <li><a href="#state" data-toggle="tab">我的动态</a></li>
+            <li><a href="#mytopics" data-toggle="tab">我的文章</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <br>
+            <div class="tab-pane fade in active" id="info" style="background-color:#fff;padding:20px 0">
+              <br>
+              <p>真实姓名：<%= user.truename %></p>
+              <p>电子邮箱：<%= user.email %></p>
+              <p>联系方式：<%= user.phone %></p>
+              <p>所在公司：<%= user.company %></p>
+              <p>个人职位：<%= user.position %></p>
+              <p>个人简介：<%= user.introduce %></p>
+              <p>QQ号码：<%= user.qq %></p>
+              <h4 class="text-center"><a href="/editpersonal" class="btn btn-danger">马上完善个人信息</a></h4>
+            </div>
+            <div class="tab-pane fade" id="state" style="background-color:#fff;padding:20px 0">
+                <br>
+                 <div class="my">
+                   <div class="dynamics">
+                     <div class="dynamic">
+                     <div class="target-border">
+                       <div class="target-dot"></div>
+                     </div>
+                     <h5><%= user.createdAt1 %> 加入美勤社区</h5>
+                    </div>
+                    <% myreplies.forEach(function(myreply){%>
+                      <div class="dynamic">
+                      <div class="target-border">
+                        <div class="target-dot"></div>
+                      </div>
+                      <h5><%= myreply.createdAt1 %> 添加了评论<%= myreply.content %></h5>
+                     </div>
+                    <% }) %>
+                  </div>
+                 </div>
+                </div>
+
+
+            <div class="tab-pane fade" id="mytopics" style="background-color:#fff">
+              <br>
+              <% topics.forEach(function(topic){%>
+                <div class="media entry">
+                 <div class="media-body">
+                    <h4 class="media-heading"><a href="/showtopic/<%=topic.id %>" style="color:#333"><%= topic.title %></a>
+                    <span class="pull-right" style="font-size:14px;">
+                      <a href="/edittopic/<%=topic.id %>" >编辑</a>
+                      <a href="/deletetopic/<%=topic.id %>">删除</a>
+                    </span>
+                    </h4>
+                    <p class="articledate"><%= topic.createdAt1 %>· <%= topic.topic_type %></p>
+                 </div>
+                </div>
+              <% }) %>
+              <h5 class="text-center"><a href="/addtopic" class="btn btn-danger">继续写文章</a></h5>
+            </div>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+<%- include footer %>

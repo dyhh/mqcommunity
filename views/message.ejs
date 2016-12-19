@@ -1,0 +1,57 @@
+<%- include header %>
+<br><br><br>
+<div class="container">
+    <!--消息区 -->
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <h1 style="text-align:center">我的消息</h4>
+      <p class="articledate">共<%= mymessages.length %>条消息</p>
+    <hr>
+    <div class="reply">
+        <% mymessages.forEach(function(mymessage){%>
+          <div class="comment">
+            <div id="<%= mymessage.id %>">
+            <p style="font-size:16px"><%= mymessage.replyer %> 在文章：<a href="/showtopic/<%=mymessage.topic_id %>">《<%= mymessage.title %>》</a>中回复了你：</p>
+            <p><span class="articledate"><%= mymessage.createdAt1 %></span></p>
+            <p class="replycontent"><%= mymessage.content %></p>
+
+
+            <div id="accordion">
+              <p class="text-right">
+                <a data-toggle="collapse" data-parent="#accordion" href="#mymessage<%= mymessage.id %>" class="blank">回复</a>
+              </p>
+              <div id="mymessage<%= mymessage.id %>" class="panel-collapse collapse">
+                <div class="comment-text" style="background-color:#f9f9f9">
+                <form class="form-horizontal"  role="form" method="post">
+                  <input type="hidden"  name="pparentid" value="<%= mymessage.pparentid %> ">
+                  <input type="hidden"  name="parentid" value="<%= mymessage.id %> ">
+                  <input type="hidden"  name="topic_id" value="<%= mymessage.topic_id %> ">
+                  <input type="hidden"  name="toid" value="<%= mymessage.user_id %> ">
+                  <input type="hidden"  name="toname" value="<%= mymessage.replyer %> ">
+                  <textarea class="mousetrap" style="background-color:#f9f9f9" name="comment" id="comment<%= mymessage.id %>" ></textarea>
+                  <button  type="submit" class="btn btn-primary bottom-space">发表</button>
+                </form>
+
+              </div>
+            </div>
+            </div>
+            <div class="childreply" id="childreply<%= mymessage.id %>"></div>
+            </div>
+            <br>
+        </div>
+
+        <script type="text/javascript">
+             $(document).ready(function(){
+               $("#unreadshow").remove();
+               $(".blank").click(function(){
+                 $("#comment<%= mymessage.id %>").text('@'+$("#comment<%= mymessage.id %>").prev("input").val()+':');
+               })
+             })
+        </script>
+        <% })%>
+        <br>
+        <p class="text-center">没有更多消息了</p>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+<%- include footer %>
