@@ -17,9 +17,9 @@ var authMiddleware = require('../middleware/auth');
 /* GET home page. */
 router.get('/', siteController.index);
 router.get('/home', authMiddleware.needLogin, messageMiddleware.getUnreadMessages, siteController.index);
-router.get('/App',  messageMiddleware.getUnreadMessages,siteController.App);
-router.get('/Performance',  messageMiddleware.getUnreadMessages,siteController.Performance);
-router.get('/Examples',  messageMiddleware.getUnreadMessages,siteController.Examples);
+router.get('/fitness',  messageMiddleware.getUnreadMessages,siteController.fitness);
+router.get('/healthy',  messageMiddleware.getUnreadMessages,siteController.healthy);
+
 
 router.route('/login')
     .get(signController.showLogin)

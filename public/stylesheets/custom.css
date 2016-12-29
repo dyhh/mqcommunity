@@ -51,7 +51,6 @@ p{
 
     font-weight: bold;
     padding-top: 5px;
-    background-image: url('../image/logo.png');
     background-repeat: no-repeat;
     background-size: 50px 45px;
   }
@@ -124,8 +123,12 @@ footer{
     margin-top: 20px;
     padding: 20px 0;
 }
-
+.navbar-default{
+  background-color: #3c8dbc;
+  border-color: #3c8dbc;
+}
 .navbar-default .navbar-nav > li > a {
+    color:#fff;
     font-weight:500;
     font-size: 15px;
 }
@@ -136,7 +139,7 @@ footer{
 @media only screen and (min-width: 400px) {
   .mainbk{
     position: relative;
-    background-image: url('../image/bk.jpeg');
+    background-image: url('../image/community.png');
     background-repeat: no-repeat;
     background-size:cover;
     width: 100%;

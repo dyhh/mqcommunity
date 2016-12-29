@@ -1,0 +1,30 @@
+<%- include header %>
+<br><br>
+<div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+
+        <% allhealthys.forEach(function(healthy){%>
+          <div class="thumbnail">
+
+            <div class="caption">
+                  <h3><a href="/showtopic/<%=healthy.id %>"><%= healthy.title %></a></h3>
+                  <p class="articledate"><%= healthy.createdAt1 %>· <%= healthy.topic_type %></p>
+                  <p>
+                      <%= healthy.brief %>
+                  </p>
+              </div>
+          </div>
+        <% })%>
+      </div>
+      <div class="col-md-2">
+      </div>
+    </div>
+</div>
+ <%- include footer %>
+ <script type="text/javascript">
+   $(document).ready(function(){
+     $("#healthy").addClass("active");
+   })
+ </script>

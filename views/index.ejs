@@ -1,20 +1,18 @@
 <%- include header %>
-<div class="row" >
-    <div class="mainbk">
 
-    </div>
-  </div>
-  <p>&nbsp;</p>
 <div class="container">
+  <div class="row" >
+      <div class="mainbk">
 
-
+      </div>
+    </div>
+    <p>&nbsp;</p>
     <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
 
         <% alltopics.forEach(function(topic){%>
           <div class="thumbnail">
-            <img src="image/tpsc04.png">
             <div class="caption">
                   <h3><a href="/showtopic/<%=topic.id %>"><%= topic.title %></a></h3>
                   <p class="articledate"><%= topic.createdAt1 %>· <%= topic.topic_type %></p>
@@ -25,7 +23,7 @@
           </div>
         <% })%>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-1">
       </div>
     </div>
 </div>

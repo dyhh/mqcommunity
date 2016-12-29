@@ -41,65 +41,45 @@ module.exports = {
          });
       })
   },
-  App :function(req,res){
+  fitness :function(req,res){
     if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    sequelize.query(`SELECT * from topics where topic_type="移动端测试" order by id desc limit 10 `,
-      { type: sequelize.QueryTypes.SELECT }).then((allapptopics)=>{
-        allapptopics.forEach(function(apptopic){
-          apptopic.createdAt1 = moment(apptopic.createdAt).format('YYYY-MM-DD');
+    sequelize.query(`SELECT * from topics where topic_type="健身交流" order by id desc limit 10 `,
+      { type: sequelize.QueryTypes.SELECT }).then((allfitnesss)=>{
+        allfitnesss.forEach(function(fitness){
+          fitness.createdAt1 = moment(fitness.createdAt).format('YYYY-MM-DD');
         })
-        res.render('App', {
-           title: '移动端性能测试',
+        res.render('fitness', {
+           title: '健身交流',
            username: res.locals.islogin,
            unreadmess: req.session.unreadmess,
-           allapptopics : allapptopics
+           allfitnesss : allfitnesss
          });
       })
   },
-  Performance :function(req,res){
+  healthy :function(req,res){
     if(req.session.islogin){
         res.locals.islogin=req.session.islogin;
     }
     if(req.cookies.islogin){
         req.session.islogin=req.cookies.islogin;
     }
-    sequelize.query(`SELECT * from topics where topic_type="性能测试"  order by id desc limit 10`,
-      { type: sequelize.QueryTypes.SELECT }).then((allperformancetopics)=>{
-        allperformancetopics.forEach(function(performancetopic){
-          performancetopic.createdAt1 = moment(performancetopic.createdAt).format('YYYY-MM-DD');
+    sequelize.query(`SELECT * from topics where topic_type="营养与健康"  order by id desc limit 10`,
+      { type: sequelize.QueryTypes.SELECT }).then((allhealthys)=>{
+        allhealthys.forEach(function(healthy){
+          healthy.createdAt1 = moment(healthy.createdAt).format('YYYY-MM-DD');
         })
-        res.render('Performance', {
-           title: '性能测试',
+        res.render('healthy', {
+           title: '营养与健康',
            username: res.locals.islogin,
            unreadmess: req.session.unreadmess,
-           allperformancetopics : allperformancetopics
+           allhealthys : allhealthys
          });
       })
-  },
-  Examples :function(req,res){
-    if(req.session.islogin){
-        res.locals.islogin=req.session.islogin;
-    }
-    if(req.cookies.islogin){
-        req.session.islogin=req.cookies.islogin;
-    }
-    sequelize.query(`SELECT * from topics where topic_type="案例分享"  order by id desc limit 10`,
-      { type: sequelize.QueryTypes.SELECT }).then((allexamples)=>{
-        allexamples.forEach(function(example){
-          example.createdAt1 = moment(example.createdAt).format('YYYY-MM-DD');
-        })
-        res.render('Examples', {
-           title: '案例分享',
-           username: res.locals.islogin,
-           unreadmess: req.session.unreadmess,
-           allexamples : allexamples
-         });
-      })
-  },
+  }
 
 }
